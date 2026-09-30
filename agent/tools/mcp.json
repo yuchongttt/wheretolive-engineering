@@ -1,0 +1,74 @@
+{
+  "mcpServers": {
+    "get_postcode_scores": {
+      "type": "stdio",
+      "command": "python3",
+      "args": [
+        "get_postcode_scores.py"
+      ]
+    },
+    "get_comparables": {
+      "type": "stdio",
+      "command": "python3",
+      "args": [
+        "get_comparables.py"
+      ]
+    },
+    "get_area_overview": {
+      "type": "stdio",
+      "command": "python3",
+      "args": [
+        "get_area_overview.py"
+      ]
+    },
+    "compare_postcodes": {
+      "type": "stdio",
+      "command": "python3",
+      "args": [
+        "compare_postcodes.py"
+      ]
+    },
+    "get_sold_nearby": {
+      "type": "stdio",
+      "command": "python3",
+      "args": [
+        "get_sold_nearby.py"
+      ]
+    },
+    "get_price_trend": {
+      "type": "stdio",
+      "command": "python3",
+      "args": [
+        "get_price_trend.py"
+      ]
+    },
+    "screen_areas": {
+      "type": "stdio",
+      "command": "python3",
+      "args": [
+        "screen_areas.py"
+      ]
+    },
+    "screen_by_commute": {
+      "type": "stdio",
+      "command": "python3",
+      "args": [
+        "screen_by_commute.py"
+      ]
+    },
+    "compute_buying_costs": {
+      "type": "stdio",
+      "command": "python3",
+      "args": [
+        "compute_buying_costs.py"
+      ]
+    },
+    "get_market_risk": {
+      "type": "stdio",
+      "command": "python3",
+      "args": [
+        "get_market_risk.py"
+      ]
+    }
+  }
+}

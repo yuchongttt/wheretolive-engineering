@@ -1,0 +1,18 @@
+[Unit]
+Description=wheretolive SigLIP luxury scoring server
+After=network.target
+
+[Service]
+Type=simple
+User=wtl
+Group=wtl
+WorkingDirectory=/data/ml/dataset
+Environment=HF_HOME=/data/ml/hf-cache
+ExecStart=/data/ml/venv/bin/python3 -u /data/ml/dataset/siglip_server.py
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

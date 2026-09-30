@@ -1,0 +1,58 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  secret-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: gitleaks (full history)
+        run: docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:v8.18.4 detect --source=/repo --redact --verbose
+
+  tests:
+    name: tests (${{ matrix.module }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - module: ops/watchdog
+            deps: ""
+          - module: ops/deploy
+            deps: ""
+          - module: ops/monitoring
+            deps: ""
+          - module: gpu-pipeline
+            deps: "pillow"
+          - module: agent/tools
+            deps: "-r requirements.txt"
+          - module: agent/evals
+            deps: ""
+          - module: scoring
+            deps: "-r requirements.txt"
+          - module: ml
+            torch: true
+            deps: "numpy pandas scikit-learn pillow"
+    defaults:
+      run:
+        working-directory: ${{ matrix.module }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: install torch (CPU wheels)
+        if: matrix.torch
+        run: pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+      - name: install deps
+        run: pip install pytest ${{ matrix.deps }}
+      - name: pytest
+        run: python -m pytest -q

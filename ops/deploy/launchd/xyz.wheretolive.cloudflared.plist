@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    launchd job: always-on cloudflared tunnel for wheretolive.xyz.
+
+    Runs `cloudflared tunnel run <tunnel-name>` which reads
+    ~/.cloudflared/config.yml to route:
+        wheretolive.xyz/*               → localhost:3000 (Next.js)
+
+    Before 2026-04-21 cloudflared was started manually by ./start.sh and left
+    unsupervised: any crash took the public site down until someone noticed.
+    Now launchd respawns it.
+
+    Install (first time):
+        cp xyz.wheretolive.cloudflared.plist ~/Library/LaunchAgents/
+        launchctl load ~/Library/LaunchAgents/xyz.wheretolive.cloudflared.plist
+
+    Inspect:
+        launchctl list | grep cloudflared
+        pgrep -fl "cloudflared tunnel"
+        tail -f /var/log/wheretolive/cloudflared-err.log
+
+    Reload (after ~/.cloudflared/config.yml edit):
+        launchctl kickstart -k gui/$(id -u)/xyz.wheretolive.cloudflared
+
+    Unload:
+        launchctl unload ~/Library/LaunchAgents/xyz.wheretolive.cloudflared.plist
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>xyz.wheretolive.cloudflared</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/cloudflared</string>
+        <string>tunnel</string>
+        <string>run</string>
+        <string>&lt;set-me&gt;</string>
+    </array>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+        <key>HOME</key>
+        <string>&lt;set-me&gt;</string>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>ThrottleInterval</key>
+    <integer>10</integer>
+
+    <key>StandardOutPath</key>
+    <string>/var/log/wheretolive/cloudflared-out.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/var/log/wheretolive/cloudflared-err.log</string>
+</dict>
+</plist>

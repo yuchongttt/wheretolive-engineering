@@ -1,0 +1,4 @@
+{"candidate_id": "q1", "query": "x", "model": "toy-9b", "ran_at": "2026-05-09T03:00:00+00:00", "thinking": true, "wall_s": 100.0, "response": "abcd", "thinking_text": "....", "eval_count": 1000}
+{"candidate_id": "q1", "query": "x", "model": "toy-9b", "ran_at": "2026-05-09T03:01:00+00:00", "thinking": false, "wall_s": 10.0, "response": "abcdefgh", "thinking_text": "", "eval_count": 100}
+{"candidate_id": "q2", "query": "y", "model": "toy-9b", "ran_at": "2026-05-09T03:02:00+00:00", "thinking": true, "wall_s": 200.0, "response": "", "thinking_text": "....", "eval_count": 4096}
+{"candidate_id": "q2", "query": "y", "model": "toy-9b", "ran_at": "2026-05-09T03:03:00+00:00", "thinking": false, "wall_s": 20.0, "response": "abcdefgh", "thinking_text": "", "eval_count": 100}

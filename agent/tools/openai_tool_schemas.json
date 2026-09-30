@@ -1,0 +1,197 @@
+{
+  "_comment": "OpenAI-compatible tool definitions for the chat-skills MCP tools, used by the self-hosted Qwen3.6-27B chat backend via vLLM's OpenAI-compatible /v1/chat/completions endpoint (tools parameter). When Qwen emits a tool_call, the chat route runs tool_runner.py, which imports the matching MCP handler directly, and feeds the JSON result back as a tool-role message. Extract note: filtered to the tools included in this directory.",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_postcode_scores",
+        "description": "Get the 5-dimension livability scores for a single UK postcode: transport, community, environment, price, schools (each 0-100). Use to answer 'is X postcode good to live in' questions or compare areas.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "postcode": {
+              "type": "string",
+              "description": "Full UK postcode like 'SE1 6JT' or 'NW3 4QG'."
+            }
+          },
+          "required": [
+            "postcode"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_area_overview",
+        "description": "Preferred one-shot narrative summary of an area: scores + active listings + last-12-month sales + nearby stations + nearby schools. Cheaper than calling search_properties + get_postcode_scores separately.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "postcode": {
+              "type": "string",
+              "description": "UK postcode or outcode."
+            }
+          },
+          "required": [
+            "postcode"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_comparables",
+        "description": "Get recent (past 3 years) Land Registry sold prices for a given listing or postcode. Use for 'is this price fair' / 'what have similar places sold for' questions. Returns per sale: sold price, sold date, property_type, tenure, address — plus the range and median. NOTE: Land Registry has NO bedroom count and NO floor area, so results are NOT bedroom-filtered and there is NO £/m² and NO distance — never state a per-bedroom, £/m² or distance figure from this tool. Pass property_type='house' or 'flat' so a house median is not polluted by cheap flats. For bedroom-specific sold data use get_sold_nearby; for £/m² use get_price_trend.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "property_id": {
+              "type": "string",
+              "description": "Listing property_id — fetches comparables for that exact listing's postcode + property_type."
+            },
+            "postcode": {
+              "type": "string",
+              "description": "Alternative to property_id — provide postcode directly."
+            },
+            "property_type": {
+              "type": "string",
+              "description": "Optional — 'house' or 'flat' (or LR code F/T/S/D). Filters comparables to that family so a house's median isn't mixed with flats. Derived from the subject when property_id is given."
+            },
+            "bedrooms": {
+              "type": "integer",
+              "description": "Advisory ONLY — Land Registry has no bedroom data, so this does NOT filter results. Prefer get_sold_nearby for bedroom-specific sold data."
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "compare_postcodes",
+        "description": "Compare 2-4 UK postcodes side by side across livability dimensions (Transport, Community/Safety, Demographics, Price, Schools) plus active-listing count and average asking price, flagging the leader on each row. Use for any 'A vs B' / 'which area is better for X' question. Unscored postcodes are reported as such — never fabricate scores.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "postcodes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "2-4 UK postcodes, e.g. ['N1 9DT','E8 1DN']."
+            }
+          },
+          "required": [
+            "postcodes"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_sold_nearby",
+        "description": "Recently SOLD properties in an outcode (listings that delisted and matched a Land Registry sale): sold price, sold date, beds/type, and realised return (annualised % and total %) where the match is confident. Use for 'what's sold around here recently' / 'are people making money here'. For raw pricing comparables prefer get_comparables. Cohort mode: pass bought_after/bought_before to ask 'did people who BOUGHT in period X (e.g. the pandemic) make money when they resold?' — returns confirmed LR buy→sell pairs + summary (n, median return, losers/gainers). Cohort headline uses standard open-market sales only (both legs LR category A, the HMLR HPI convention) at the narrowest adequate rung of ~800m walk radius → sector → outcode; category B counts are disclosed, with an including-B reading when it materially differs, plus a purchase-year split.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "postcode": {
+              "type": "string",
+              "description": "UK postcode or outcode, e.g. 'SE15' or 'SE15 3AB'. Recent-sales mode matches at outcode level. In cohort mode pass the FULL postcode when you have one — the answer then leads with the ~800m walk-radius sample (what 'nearby' actually means), falling back to sector then outcode only when the standard-sale sample is thin."
+            },
+            "bedrooms": {
+              "type": "integer",
+              "description": "Optional — restrict to this bedroom count (±1)."
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max results (default 15, max 40)."
+            },
+            "bought_after": {
+              "type": "string",
+              "description": "Cohort mode — only pairs PURCHASED on/after this date (YYYY-MM-DD), e.g. 2020-03-01 for pandemic buyers."
+            },
+            "bought_before": {
+              "type": "string",
+              "description": "Cohort mode — only pairs purchased before this date (YYYY-MM-DD)."
+            }
+          },
+          "required": [
+            "postcode"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_price_trend",
+        "description": "Price trend for a postcode from Land Registry history: median & average price, price per sqm, trend direction, and 3/5/10yr CAGR (each with sample count — low n is indicative only). Use for 'are prices rising in X' / 'how much have homes appreciated' / 'is this a good area to invest'. Says so if the postcode isn't evaluated. Optional by_type=true adds a flats-vs-houses split — their medians and trends often diverge, so use it whenever the user cares about a specific property type.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "postcode": {
+              "type": "string",
+              "description": "UK postcode, e.g. 'SE15 3AB'."
+            },
+            "by_type": {
+              "type": "boolean",
+              "description": "true → also split by property type: flats (F) vs houses (D/S/T), each with its own 12-month-window median, YoY and repeat-sales CAGR (sample sizes labelled; thin segments widen to sector/outcode and say so). Default false."
+            }
+          },
+          "required": [
+            "postcode"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "screen_areas",
+        "description": "Find postcodes matching multi-dimension criteria across all scored London postcodes — a screener. Filters: min_transport / min_community / min_schools / min_price_score (0-100 score floors) and max_median_price (£). Ranks by sort_by (transport|community|schools|price_score|overall|median_price, default overall). Use for open-ended 'which areas are good for X' / 'good transport but affordable' questions, NOT a single named postcode.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "min_transport": {
+              "type": "number",
+              "description": "Min transport score 0-100."
+            },
+            "min_community": {
+              "type": "number",
+              "description": "Min community score 0-100."
+            },
+            "min_environment": {
+              "type": "number",
+              "description": "Min environment (noise/flood/air/parks) score 0-100."
+            },
+            "min_schools": {
+              "type": "number",
+              "description": "Min schools score 0-100."
+            },
+            "min_price_score": {
+              "type": "number",
+              "description": "Min price/value score 0-100."
+            },
+            "max_median_price": {
+              "type": "integer",
+              "description": "Max area median sale price in GBP."
+            },
+            "sort_by": {
+              "type": "string",
+              "description": "transport|community|schools|price_score|overall|median_price (default overall)."
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max results (default 15, max 40)."
+            }
+          },
+          "required": []
+        }
+      }
+    }
+  ]
+}

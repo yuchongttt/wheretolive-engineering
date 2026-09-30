@@ -1,0 +1,164 @@
+{
+  "description": "Evaluation config - legacy category weights, dimension switches and API tiers",
+
+  "weights": {
+    "location_convenience": 0.40,
+    "surrounding_environment": 0.25,
+    "economic_factors": 0.35
+  },
+
+  "dimensions": {
+    "location_convenience": {
+      "enabled": true,
+      "description": "Location convenience",
+      "sub_dimensions": {
+        "commute": {
+          "enabled": true,
+          "api_tier": "mixed",
+          "free_api": "tfl",
+          "paid_api": "google_routes",
+          "description": "Commute (--all uses Google Routes; --free uses TfL inside London)"
+        },
+        "transit": {
+          "enabled": true,
+          "api_tier": "mixed",
+          "free_api": "tfl",
+          "paid_api": "google_places",
+          "description": "Public transport access (--all uses Google Places; --free uses TfL inside London)"
+        },
+        "amenities": {
+          "enabled": true,
+          "api_tier": "paid",
+          "free_api": null,
+          "paid_api": "google_places",
+          "description": "Nearby amenities (Google Places API only)"
+        },
+        "long_distance": {
+          "enabled": true,
+          "api_tier": "paid",
+          "free_api": null,
+          "paid_api": "google_routes + google_places",
+          "description": "Airports and mainline stations (Google APIs only)"
+        }
+      }
+    },
+    "surrounding_environment": {
+      "enabled": true,
+      "description": "Surrounding environment",
+      "sub_dimensions": {
+        "safety": {
+          "enabled": true,
+          "api_tier": "free",
+          "free_api": "uk_police",
+          "paid_api": "uk_police",
+          "description": "Street crime (data.police.uk, free)"
+        },
+        "demographics": {
+          "enabled": true,
+          "api_tier": "free",
+          "free_api": "postcodes_io + imd_2025",
+          "paid_api": "postcodes_io + imd_2025",
+          "description": "Area demographics (postcodes.io + IMD 2025, free)"
+        },
+        "parks": {
+          "enabled": true,
+          "api_tier": "none",
+          "description": "Distance to parks"
+        },
+        "air_quality": {
+          "enabled": true,
+          "api_tier": "free",
+          "free_api": "laqn + uk_air_aurn",
+          "paid_api": "laqn + uk_air_aurn",
+          "description": "Air quality (LAQN for London + UK-AIR AURN nationally, free)"
+        }
+      }
+    },
+    "economic_factors": {
+      "enabled": true,
+      "description": "Economic factors",
+      "sub_dimensions": {
+        "value_for_money": {
+          "enabled": true,
+          "api_tier": "none",
+          "description": "Value for money"
+        },
+        "price_analysis": {
+          "enabled": true,
+          "api_tier": "free",
+          "free_api": "land_registry + epc",
+          "paid_api": "land_registry + epc",
+          "description": "Area price analysis (HM Land Registry + EPC, free)"
+        }
+      }
+    }
+  },
+
+  "api_tiers": {
+    "free": {
+      "description": "Free APIs, no usage cap",
+      "apis": ["tfl", "land_registry", "epc", "uk_police"]
+    },
+    "paid": {
+      "description": "Paid APIs, billed per call",
+      "apis": ["google_routes", "google_places", "google_geocoding"]
+    }
+  },
+  "api_limits": {
+    "google_routes": {
+      "monthly_limit": 4500
+    },
+    "google_places": {
+      "monthly_limit": 900
+    },
+    "google_geocoding": {
+      "monthly_limit": 4500
+    }
+  },
+
+  "evaluation_criteria": {
+    "location_convenience": {
+      "commute": 0.30,
+      "public_transport": 0.25,
+      "shopping": 0.15,
+      "travel_hubs": 0.10,
+      "medical": 0.12,
+      "dining": 0.05,
+      "basic_services": 0.03
+    },
+    "surrounding_environment": {
+      "safety": 0.30,
+      "greenery": 0.20,
+      "air_quality": 0.25,
+      "cleanliness": 0.15,
+      "community": 0.10
+    },
+    "economic_factors": {
+      "price_value": 0.35,
+      "fees": 0.25,
+      "utilities_cost": 0.15,
+      "appreciation": 0.25
+    }
+  },
+
+  "rating_thresholds": {
+    "excellent": 90,
+    "good": 80,
+    "fair": 70,
+    "average": 60,
+    "poor": 0
+  },
+
+  "notes": {
+    "version": "2.0.0",
+    "last_updated": "2026-01-28",
+    "api_tiers": {
+      "free": "Free APIs: TfL, Land Registry, EPC, UK Police",
+      "paid": "Paid APIs: Google Routes, Google Places, Google Geocoding",
+      "mixed": "--free: TfL inside London, skipped elsewhere; --all: Google everywhere",
+      "none": "No API needed; uses caller-supplied data"
+    },
+    "usage": "Use --free for free APIs only, --all to include paid APIs",
+    "london_note": "In --free mode, London postcodes (E, N, NW, W, SW, SE, EC, WC, ...) use the TfL API"
+  }
+}

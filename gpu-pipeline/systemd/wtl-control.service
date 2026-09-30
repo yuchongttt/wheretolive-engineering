@@ -1,0 +1,20 @@
+[Unit]
+Description=wheretolive control endpoint (systemctl proxy for mac admin)
+After=network-online.target
+
+[Service]
+Type=simple
+# Runs as root because it calls systemctl on whitelisted units. See
+# control_server.py module docstring for the security trade-off.
+User=root
+Group=root
+WorkingDirectory=/data/ml/dataset
+EnvironmentFile=/etc/wtl/wtl.env
+ExecStart=/data/ml/venv/bin/python3 -u /data/ml/dataset/control_server.py
+Restart=on-failure
+RestartSec=30
+StandardOutput=append:/data/ml/logs/control.log
+StandardError=append:/data/ml/logs/control.log
+
+[Install]
+WantedBy=multi-user.target

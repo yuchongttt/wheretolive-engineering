@@ -1,0 +1,6 @@
+requests>=2.31
+numpy>=1.24
+scipy>=1.10        # PCHIP interpolation for calibration
+shapely>=2.0       # park polygons (parks_index.py)
+python-dotenv>=1.0 # optional: loads TFL_APP_KEY from .env
+pytest>=7          # tests only

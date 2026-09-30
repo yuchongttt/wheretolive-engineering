@@ -1,0 +1,20 @@
+[Unit]
+Description=wheretolive EPC lookup service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=wtl
+WorkingDirectory=/data/ml/dataset
+ExecStart=/data/ml/dataset/epc_venv/bin/python /data/ml/dataset/epc_server.py --host 0.0.0.0 --port 8400
+Environment=PYTHONUNBUFFERED=1
+StandardOutput=append:/data/ml/logs/epc-server.log
+StandardError=append:/data/ml/logs/epc-server.log
+Restart=on-failure
+RestartSec=5
+# Yield to dino/siglip/embed daemons under memory pressure
+OOMScoreAdjust=300
+
+[Install]
+WantedBy=multi-user.target

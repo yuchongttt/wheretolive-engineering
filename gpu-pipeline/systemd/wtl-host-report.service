@@ -1,0 +1,9 @@
+[Unit]
+Description=wheretolive host metrics report
+After=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/wtl/wtl.env
+ExecStart=/opt/wheretolive/host_report.sh
+User=wtl

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    launchd job: always-on Next.js prod server for wheretolive.xyz.
+
+    Runs `next start` (via `npm run start`) on port 3000. Cloudflared tunnel
+    routes public traffic from wheretolive.xyz here.
+
+    Requires `npm run build` to have been done at least once. The job
+    does NOT rebuild on start (keep it simple; ../prod-deploy.sh builds,
+    then restarts this job).
+
+    Install:
+        cp xyz.wheretolive.next-prod.plist ~/Library/LaunchAgents/
+        launchctl load ~/Library/LaunchAgents/xyz.wheretolive.next-prod.plist
+
+    Inspect:
+        launchctl list | grep next-prod
+        curl -I http://localhost:3000/
+        tail -f /var/log/wheretolive/next-prod-err.log
+
+    Reload (after code change + rebuild):
+        npm run build
+        launchctl kickstart -k gui/$(id -u)/xyz.wheretolive.next-prod
+
+    Unload:
+        launchctl unload ~/Library/LaunchAgents/xyz.wheretolive.next-prod.plist
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>xyz.wheretolive.next-prod</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/npm</string>
+        <string>run</string>
+        <string>start</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/opt/wheretolive/web</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+        <key>HOME</key>
+        <string>&lt;set-me&gt;</string>
+        <key>NODE_ENV</key>
+        <string>production</string>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>ThrottleInterval</key>
+    <integer>30</integer>
+
+    <key>StandardOutPath</key>
+    <string>/var/log/wheretolive/next-prod-out.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/var/log/wheretolive/next-prod-err.log</string>
+</dict>
+</plist>

@@ -1,0 +1,15 @@
+[Unit]
+Description=Run wtl-siglip-report every minute
+
+[Timer]
+OnBootSec=40
+# Absolute schedule — see wtl-embed-report.timer for the OnUnitActiveSec
+# drift rationale. Offset from the embed reporter by 30s implicitly
+# (the timer fires on minute boundaries; embed reporter does too, so
+# they collide once per minute — fine, different tables).
+OnCalendar=*:0/1
+AccuracySec=5s
+Unit=wtl-siglip-report.service
+
+[Install]
+WantedBy=timers.target

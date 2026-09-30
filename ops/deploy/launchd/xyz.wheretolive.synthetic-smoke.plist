@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>xyz.wheretolive.synthetic-smoke</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/node</string>
+        <string>/opt/wheretolive/scripts/synthetic_smoke.mjs</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/opt/wheretolive</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+        <key>HOME</key>
+        <string>&lt;set-me&gt;</string>
+    </dict>
+    <key>StartInterval</key>
+    <integer>1800</integer>
+    <key>RunAtLoad</key>
+    <false/>
+    <!-- launchd stdout/stderr must live outside the repo checkout (in production
+         a TCC-protected folder). The script itself appendFileSyncs
+         logs/synthetic-smoke.log; if launchd pointed at that same file, then
+         once the file was recreated it lost its com.apple.macl xattr, launchd
+         could no longer open it, and the spawn failed with exit 78 and zero
+         logs (silently dead for 10 days, 2026-06-27 to 07-07). This file only
+         catches node crashes / startup errors. -->
+    <key>StandardOutPath</key>
+    <string>/var/log/wheretolive/synthetic-smoke.launchd.log</string>
+    <key>StandardErrorPath</key>
+    <string>/var/log/wheretolive/synthetic-smoke.launchd.log</string>
+</dict>
+</plist>

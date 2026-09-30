@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    launchd job: PRAGMA wal_checkpoint(PASSIVE) every 5 min.
+
+    Why: long-running readers (ML training scripts, enrichment jobs, even a
+    quiet next-prod with one stale connection) prevent SQLite's
+    auto-checkpoint from advancing. WAL then grows to GB+ in a few
+    hours, and reads slow to a crawl because every query has to scan
+    the WAL frame index. Explicit PASSIVE checkpoint nudges things
+    along without competing for locks.
+
+    Install:
+        cp xyz.wheretolive.wal-checkpoint.plist ~/Library/LaunchAgents/
+        launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/xyz.wheretolive.wal-checkpoint.plist
+
+    Inspect:
+        tail -f /var/log/wheretolive/wal-checkpoint.log
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>xyz.wheretolive.wal-checkpoint</string>
+
+    <!-- Was /bin/bash + sqlite3 CLI, hit TCC on the protected checkout.
+         Project venv python is already TCC-cleared (other launchd jobs
+         use it without issue). -->
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/wheretolive/venv/bin/python3</string>
+        <string>/opt/wheretolive/scripts/wal_checkpoint.py</string>
+    </array>
+
+    <key>StartInterval</key>
+    <integer>300</integer>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>StandardOutPath</key>
+    <string>/var/log/wheretolive/wal-checkpoint.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/var/log/wheretolive/wal-checkpoint.err</string>
+</dict>
+</plist>

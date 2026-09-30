@@ -1,0 +1,26 @@
+name = "wtl-health-monitor"
+main = "src/index.js"
+compatibility_date = "2026-05-18"
+# Cron-only worker — no public URL needed, skips workers.dev subdomain requirement
+workers_dev = false
+
+# Cron: every 5 minutes
+[triggers]
+crons = ["*/5 * * * *"]
+
+# Workers KV — stores last health status + last alert timestamp.
+# REPLACE the id below with the value returned by:
+#   wrangler kv namespace create wtl-monitor-state
+[[kv_namespaces]]
+binding = "STATE"
+id = "<KV_NAMESPACE_ID>"
+
+# Non-secret config
+[vars]
+HEALTH_URL = "https://wheretolive.xyz/api/health"
+# Telegram chat id to alert. Placeholder — set it here at deploy time, or
+# delete this line and use `wrangler secret put TG_CHAT_ID` instead.
+TG_CHAT_ID = "<TG_CHAT_ID>"
+
+# Secrets (set via wrangler secret put):
+#   TG_TOKEN     Telegram bot token

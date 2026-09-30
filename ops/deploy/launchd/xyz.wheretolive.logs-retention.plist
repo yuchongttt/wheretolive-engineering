@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    launchd job: weekly retention sweep for launchd stdio logs. Deletes
+    *.log / *.err idle > 90 days (leftovers of retired or renamed units). Live
+    logs have fresh mtimes and are never touched. See
+    scripts/launchd_logs_retention.py.
+
+    Sun 04:50, after ops-retention (04:40) in the quiet weekly window.
+
+    Install:
+        cp xyz.wheretolive.logs-retention.plist ~/Library/LaunchAgents/
+        launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/xyz.wheretolive.logs-retention.plist
+
+    Ad-hoc (dry run):
+        /opt/homebrew/bin/python3 scripts/launchd_logs_retention.py (dry-run flag)
+
+    NOTE: must be Homebrew python3, NOT Apple's /usr/bin/python3. Apple's
+    interpreter has no Full Disk Access, so under launchd it cannot open a
+    script living in the TCC-protected checkout ("Operation not permitted",
+    exit 2), which silently broke this job. Every other working unit uses the
+    Homebrew binary or venv/bin/python3 (a symlink into /opt/homebrew) for
+    this reason.
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>xyz.wheretolive.logs-retention</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/python3</string>
+        <string>/opt/wheretolive/scripts/launchd_logs_retention.py</string>
+    </array>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+        <key>HOME</key>
+        <string>&lt;set-me&gt;</string>
+    </dict>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Weekday</key><integer>0</integer>
+        <key>Hour</key><integer>4</integer>
+        <key>Minute</key><integer>50</integer>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>/var/log/wheretolive/logs-retention.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/var/log/wheretolive/logs-retention.log</string>
+</dict>
+</plist>

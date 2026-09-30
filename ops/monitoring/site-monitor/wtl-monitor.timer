@@ -1,0 +1,11 @@
+[Unit]
+Description=Hourly site health check (5 min past every hour)
+
+[Timer]
+# :05 each hour to avoid the top-of-hour cron rush.
+OnCalendar=*-*-* *:05:00
+Persistent=true
+Unit=wtl-monitor.service
+
+[Install]
+WantedBy=timers.target

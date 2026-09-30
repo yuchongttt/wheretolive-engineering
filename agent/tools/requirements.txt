@@ -1,0 +1,2 @@
+mcp>=1.27,<2   # the low-level Server decorator API (list_tools/call_tool) used here is the 1.x API
+pytest>=7

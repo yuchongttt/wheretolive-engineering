@@ -1,0 +1,21 @@
+{
+  "_comment": "Copy to property_params.json. No secrets belong in this file: set GOOGLE_API_KEY (optional, enables the paid Google APIs), TFL_APP_KEY (optional) and EPC_SERVICE_URL in the environment instead.",
+  "epc": {
+    "service_url": "http://localhost:8400"
+  },
+  "commute_settings": {
+    "office_address": "EC2R 8AH",
+    "school_address": "",
+    "travel_mode": "TRANSIT",
+    "alternatives": [
+      {"name": "driving", "travel_mode": "DRIVE"},
+      {"name": "walking", "travel_mode": "WALK"},
+      {"name": "cycling", "travel_mode": "BICYCLE"}
+    ]
+  },
+  "evaluation_preferences": {
+    "primary_commute_mode": "TRANSIT",
+    "max_acceptable_commute_minutes": 45,
+    "ideal_commute_minutes": 30
+  }
+}

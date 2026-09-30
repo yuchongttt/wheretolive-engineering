@@ -1,0 +1,19 @@
+[Unit]
+Description=wheretolive external site health monitor (Hetzner blackbox)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/wtl-monitor
+EnvironmentFile=/etc/wtl-monitor.env
+ExecStart=/opt/wtl-monitor/.venv/bin/python /opt/wtl-monitor/monitor.py
+# 25 min hard cap — worst case is 8 Lighthouse × 90s + 11 Playwright × 30s.
+RuntimeMaxSec=1500
+Nice=10
+StandardOutput=append:/opt/wtl-monitor/logs/monitor.log
+StandardError=append:/opt/wtl-monitor/logs/monitor.log
+
+[Install]
+WantedBy=multi-user.target

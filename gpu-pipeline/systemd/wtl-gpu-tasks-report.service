@@ -1,0 +1,9 @@
+[Unit]
+Description=wheretolive GPU tasks report
+After=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/wtl/wtl.env
+ExecStart=/usr/bin/python3 /data/ml/dataset/report_gpu_tasks.py
+User=wtl

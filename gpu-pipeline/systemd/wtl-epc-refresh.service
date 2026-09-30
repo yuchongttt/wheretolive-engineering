@@ -1,0 +1,24 @@
+[Unit]
+Description=wheretolive EPC register refresh (GOV.UK bulk file -> epc.db, then restart wtl-epc-server)
+# scripts/epc_refresh.py: checks the monthly domestic-csv.zip; only when a new one
+# exists does it download (~3 GB), rebuild epc_next.db, gate it against the live
+# DB and swap it in. Token: ~/.config/wtl/epc_bearer_token of the service user (mode 600),
+# from the service's "My account" page (GOV.UK One Login).
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=wtl
+WorkingDirectory=/data/ml/dataset/epc_tools
+ExecStart=/data/ml/dataset/epc_venv/bin/python /data/ml/dataset/epc_tools/epc_refresh.py
+Environment=PYTHONUNBUFFERED=1
+StandardOutput=append:/data/ml/logs/epc-refresh.log
+StandardError=append:/data/ml/logs/epc-refresh.log
+# The rebuild streams ~30M rows through /data (spinning disk shared with the
+# embed / dino daemons): stay out of their way, and be the first OOM victim.
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+OOMScoreAdjust=500
+TimeoutStartSec=8h

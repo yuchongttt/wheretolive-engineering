@@ -1,0 +1,8 @@
+{
+  "_about": "launchd jobs the watchdog may kickstart (label without the xyz.wheretolive. prefix). fresh_minutes = how recently a healthy signal is expected. Optional ledger_skill = read freshness from the newest ops.db skill_runs row for that skill instead of the job's log file. Public copy: the production list also names data-ingestion jobs that are not part of this repo.",
+  "jobs": {
+    "radar-matcher": {"fresh_minutes": 70},
+    "queue-status": {"fresh_minutes": 70},
+    "claude-cost-alert": {"fresh_minutes": 70}
+  }
+}

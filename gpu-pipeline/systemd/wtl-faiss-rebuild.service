@@ -1,0 +1,26 @@
+[Unit]
+Description=Rebuild stable FAISS indices (base + v10) from dataset.db
+# Embedding daemon doesn't need to stop — build_faiss_index.py reads
+# image_embeddings read-only and writes to a different directory, so
+# concurrent writes are safe. The --clear-delta step at the end is
+# what swaps over to the fresh stable + empty delta state.
+After=wtl-dino-embed.service
+
+[Service]
+Type=oneshot
+User=wtl
+Group=wtl
+WorkingDirectory=/opt/wheretolive
+Nice=10
+IOSchedulingClass=idle
+# Build both heads. clear-delta on the second one only — we want both
+# to flip atomically to the same logical "now" point.
+ExecStart=/data/ml/venv/bin/python3 -u /opt/wheretolive/build_faiss_index.py --model base --clear-delta
+ExecStart=/data/ml/venv/bin/python3 -u /opt/wheretolive/build_faiss_index.py --model v10  --clear-delta
+# After rebuild + clear, restart server so it picks up fresh stable and
+# empty delta (otherwise it keeps querying the in-memory stable from
+# previous boot until 10-search mtime poll catches up).
+ExecStartPost=/bin/systemctl restart wtl-dino-server
+
+[Install]
+WantedBy=multi-user.target

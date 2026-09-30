@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    launchd job: host metrics collector for the Mac mini.
+
+    Runs host_report.sh every 60 seconds and POSTs a CPU/RAM/disk/net/
+    temperature snapshot to the wheretolive admin API on localhost:3000.
+
+    Deploy / re-deploy (after editing this plist OR host_report.sh) is done by
+    a small deploy script (not included here) that:
+      - copies host_report.sh out of the repo checkout into
+        /usr/local/lib/wheretolive/ (in production the checkout sits in a
+        TCC-protected folder that launchd's /bin/bash cannot read)
+      - fills in WTL_ADMIN_KEY from the web app's env file
+      - installs the plist to ~/Library/LaunchAgents/
+      - bootout + bootstrap to reload
+
+    Inspect:
+        launchctl list | grep host-report          # exit code should be 0
+        launchctl print gui/$(id -u)/xyz.wheretolive.host-report
+        tail -f /var/log/wheretolive/host-report-stderr.log
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>xyz.wheretolive.host-report</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/usr/local/lib/wheretolive/host_report.sh</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/usr/local/lib/wheretolive</string>
+
+    <key>StartInterval</key>
+    <integer>60</integer>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>StandardOutPath</key>
+    <string>/var/log/wheretolive/host-report-stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/var/log/wheretolive/host-report-stderr.log</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>WTL_API</key>
+        <string>http://127.0.0.1:3000</string>
+        <key>WTL_ADMIN_KEY</key>
+        <string>&lt;set-me&gt;</string>
+        <key>WTL_HOST_ID</key>
+        <string>mac-mini</string>
+        <key>PATH</key>
+        <string>/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+</dict>
+</plist>

@@ -1,0 +1,35 @@
+{
+  "office_address": "ec2r8ah",
+  "travel_mode": "TRANSIT",
+  "schedule": {
+    "morning": {
+      "enabled": true,
+      "departure_time": "2026-01-23T08:30:00Z",
+      "description": "Morning commute, home to office",
+      "direction": "home_to_office"
+    },
+    "evening": {
+      "enabled": true,
+      "departure_time": "2026-01-23T18:00:00Z",
+      "description": "Evening commute, office to home",
+      "direction": "office_to_home"
+    }
+  },
+  "scoring_weights": {
+    "morning": 0.6,
+    "evening": 0.4,
+    "description": "Weights of the morning/evening legs (Google Routes path only); morning weighs more"
+  },
+  "notes": {
+    "travel_modes": [
+      "DRIVE",
+      "BICYCLE",
+      "WALK",
+      "TRANSIT",
+      "TWO_WHEELER"
+    ],
+    "departure_time_format": "RFC 3339, e.g. '2026-01-23T08:30:00Z' or '2026-01-23T08:30:00+00:00'",
+    "timezone": "Use Z for UTC or an explicit offset such as +01:00",
+    "usage": "office_address is the default commute destination; the TfL path always queries the next weekday 09:00 and ignores departure_time"
+  }
+}

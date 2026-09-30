@@ -1,0 +1,557 @@
+{
+  "version": 1,
+  "types": {
+    "area": {
+      "fields": [
+        "value"
+      ],
+      "label": "区域"
+    },
+    "price": {
+      "fields": [
+        "min",
+        "max"
+      ],
+      "label": "价格(£)"
+    },
+    "bedrooms": {
+      "fields": [
+        "min",
+        "max"
+      ],
+      "label": "卧室"
+    },
+    "bathrooms": {
+      "fields": [
+        "min"
+      ],
+      "label": "卫生间(≥)"
+    },
+    "property_type": {
+      "fields": [
+        "value"
+      ],
+      "label": "户型"
+    },
+    "tenure": {
+      "fields": [
+        "value"
+      ],
+      "label": "产权"
+    },
+    "sqft": {
+      "fields": [
+        "min",
+        "max"
+      ],
+      "label": "面积(sqft)"
+    },
+    "commute": {
+      "fields": [
+        "hub",
+        "max_minutes"
+      ],
+      "label": "通勤"
+    },
+    "station_walk": {
+      "fields": [
+        "max_minutes"
+      ],
+      "label": "步行到站(分钟,≤)"
+    },
+    "ppsf": {
+      "fields": [
+        "min",
+        "max"
+      ],
+      "label": "单价(£/sqft)"
+    },
+    "decor_tier": {
+      "fields": [
+        "min",
+        "value"
+      ],
+      "label": "装修档次(1-10分)"
+    },
+    "postcode_score": {
+      "fields": [
+        "dimension",
+        "op",
+        "value"
+      ],
+      "label": "区域评分"
+    },
+    "garden": {
+      "fields": [
+        "value"
+      ],
+      "label": "花园"
+    },
+    "ex_council": {
+      "fields": [
+        "value"
+      ],
+      "label": "前公房"
+    },
+    "balcony": {
+      "fields": [
+        "value"
+      ],
+      "label": "阳台"
+    },
+    "room_area": {
+      "fields": [
+        "room",
+        "agg",
+        "min_sqm",
+        "min_long_edge_m"
+      ],
+      "label": "房间面积/最长边"
+    },
+    "chain_free": {
+      "fields": [
+        "value"
+      ],
+      "label": "无房链"
+    },
+    "parking": {
+      "fields": [
+        "value"
+      ],
+      "label": "停车"
+    },
+    "lease_years": {
+      "fields": [
+        "min"
+      ],
+      "label": "租期(年,≥)"
+    },
+    "service_charge": {
+      "fields": [
+        "max"
+      ],
+      "label": "服务费(£/年,≤)"
+    },
+    "ground_rent": {
+      "fields": [
+        "max"
+      ],
+      "label": "地租(£/年,≤)"
+    },
+    "lift": {
+      "fields": [
+        "value"
+      ],
+      "label": "电梯"
+    },
+    "epc": {
+      "fields": [
+        "min"
+      ],
+      "label": "EPC能效(≥)"
+    },
+    "council_tax": {
+      "fields": [
+        "max"
+      ],
+      "label": "市政税档(≤)"
+    },
+    "auction": {
+      "fields": [
+        "value"
+      ],
+      "label": "拍卖"
+    },
+    "shared_ownership": {
+      "fields": [
+        "value"
+      ],
+      "label": "共有产权"
+    },
+    "conservatory": {
+      "fields": [
+        "value"
+      ],
+      "label": "阳光房"
+    },
+    "fireplace": {
+      "fields": [
+        "value"
+      ],
+      "label": "壁炉"
+    },
+    "garage": {
+      "fields": [
+        "value"
+      ],
+      "label": "车库"
+    },
+    "terrace": {
+      "fields": [
+        "value"
+      ],
+      "label": "露台"
+    },
+    "open_plan_kitchen": {
+      "fields": [
+        "value"
+      ],
+      "label": "开放式厨房"
+    },
+    "days_on_market": {
+      "fields": [
+        "min"
+      ],
+      "label": "在市天数(≥)"
+    },
+    "price_reduced": {
+      "fields": [
+        "value",
+        "within_days",
+        "min_drop_pct"
+      ],
+      "label": "已降价"
+    },
+    "cladding": {
+      "fields": [
+        "value"
+      ],
+      "label": "Cladding问题"
+    },
+    "relisted": {
+      "fields": [
+        "value"
+      ],
+      "label": "曾下架重挂"
+    },
+    "green_space": {
+      "fields": [
+        "min"
+      ],
+      "label": "绿地/近公园(分,≥)"
+    },
+    "mortgageable": {
+      "fields": [
+        "value"
+      ],
+      "label": "可贷款(无红旗)"
+    },
+    "prior_sale": {
+      "fields": [
+        "below",
+        "within_years"
+      ],
+      "label": "上次成交"
+    },
+    "garden_facing": {
+      "fields": [
+        "value"
+      ],
+      "label": "花园朝向(中介自报或户型图判定)"
+    },
+    "garden_sqft": {
+      "fields": [
+        "min"
+      ],
+      "label": "花园面积(sqft,户型图标注)"
+    }
+  },
+  "enums": {
+    "garden_facing.value": [
+      "south",
+      "north",
+      "east",
+      "west",
+      "south-east",
+      "south-west",
+      "north-east",
+      "north-west"
+    ],
+    "decor_tier": [
+      "high",
+      "mid",
+      "low"
+    ],
+    "postcode_score.dimension": [
+      "total",
+      "transport",
+      "community",
+      "environment",
+      "price",
+      "schools"
+    ],
+    "postcode_score.op": [
+      "gte",
+      "lte"
+    ],
+    "commute.to_station": [
+      "walk",
+      "drive",
+      "cycle"
+    ],
+    "commute.hub": [
+      "Aldgate",
+      "Aldgate East",
+      "Angel",
+      "Baker Street",
+      "Bank",
+      "Barbican",
+      "Battersea Power Station",
+      "Bayswater",
+      "Bermondsey",
+      "Blackfriars",
+      "Bond Street",
+      "Borough",
+      "Brixton",
+      "Camden Town",
+      "Canada Water",
+      "Canary Wharf",
+      "Cannon Street",
+      "Chancery Lane",
+      "Charing Cross",
+      "Clapham Junction",
+      "Covent Garden",
+      "Ealing Broadway",
+      "Earl's Court",
+      "East Croydon",
+      "Edgware Road",
+      "Elephant & Castle",
+      "Embankment",
+      "Euston",
+      "Euston Square",
+      "Farringdon",
+      "Finsbury Park",
+      "Gloucester Road",
+      "Goodge Street",
+      "Great Portland Street",
+      "Green Park",
+      "Hammersmith",
+      "Heathrow",
+      "High Street Kensington",
+      "Highbury & Islington",
+      "Holborn",
+      "Hoxton",
+      "Hyde Park Corner",
+      "Kennington",
+      "Kensington Olympia",
+      "King's Cross",
+      "Knightsbridge",
+      "Lambeth North",
+      "Lancaster Gate",
+      "Leicester Square",
+      "Lewisham",
+      "Liverpool Street",
+      "London Bridge",
+      "Mansion House",
+      "Marble Arch",
+      "Marylebone",
+      "Monument",
+      "Moorgate",
+      "Nine Elms",
+      "North Greenwich",
+      "Notting Hill Gate",
+      "Old Street",
+      "Oxford Circus",
+      "Paddington",
+      "Piccadilly Circus",
+      "Pimlico",
+      "Poplar",
+      "Queensway",
+      "Regent's Park",
+      "Russell Square",
+      "Shadwell",
+      "Shepherd's Bush",
+      "Shoreditch High Street",
+      "Sloane Square",
+      "South Kensington",
+      "Southwark",
+      "St James's Park",
+      "St Paul's",
+      "Stratford",
+      "Stratford International",
+      "Temple",
+      "Tottenham Court Road",
+      "Tower Gateway",
+      "Tower Hill",
+      "Vauxhall",
+      "Victoria",
+      "Warren Street",
+      "Waterloo",
+      "West Hampstead",
+      "Westminster",
+      "White City",
+      "Whitechapel",
+      "Willesden Junction",
+      "Wimbledon"
+    ],
+    "room_area.room": [
+      "bedroom",
+      "reception",
+      "kitchen",
+      "dining",
+      "balcony"
+    ],
+    "room_area.agg": [
+      "max",
+      "min"
+    ]
+  },
+  "hub_aliases": {
+    "clerkenwell": "Farringdon",
+    "smithfield": "Farringdon",
+    "the city": "Bank",
+    "city of london": "Bank",
+    "square mile": "Bank",
+    "soho": "Oxford Circus",
+    "fitzrovia": "Warren Street",
+    "bloomsbury": "Russell Square",
+    "mayfair": "Green Park",
+    "shoreditch": "Old Street",
+    "spitalfields": "Liverpool Street",
+    "bishopsgate": "Liverpool Street",
+    "docklands": "Canary Wharf",
+    "isle of dogs": "Canary Wharf",
+    "the strand": "Charing Cross",
+    "strand": "Charing Cross",
+    "aldwych": "Temple",
+    "belgravia": "Victoria",
+    "chelsea": "Sloane Square",
+    "kensington": "High Street Kensington",
+    "st katharine docks": "Tower Hill",
+    "st katherine docks": "Tower Hill",
+    "more london": "London Bridge",
+    "bankside": "Southwark",
+    "borough market": "London Bridge",
+    "oval": "Kennington",
+    "islington": "Angel",
+    "st pancras": "King's Cross",
+    "whitehall": "Westminster",
+    "rotherhithe": "Canada Water",
+    "surrey quays": "Canada Water",
+    "st johns wood": "Baker Street",
+    "hampstead": "West Hampstead",
+    "kilburn": "West Hampstead",
+    "swiss cottage": "West Hampstead",
+    "maida vale": "Edgware Road",
+    "little venice": "Paddington",
+    "kentish town": "Camden Town",
+    "dalston": "Hoxton",
+    "wapping": "Shadwell",
+    "ucl": "Euston Square",
+    "university college london": "Euston Square",
+    "uclh": "Euston Square",
+    "lse": "Holborn",
+    "london school of economics": "Holborn",
+    "imperial": "South Kensington",
+    "imperial college": "South Kensington",
+    "kcl": "Temple",
+    "kings college london": "Temple",
+    "soas": "Russell Square",
+    "city university": "Angel",
+    "google": "King's Cross",
+    "google london": "King's Cross",
+    "bloomberg": "Bank",
+    "goldman sachs": "Farringdon",
+    "amazon london": "Liverpool Street",
+    "royal london hospital": "Whitechapel",
+    "guys hospital": "London Bridge",
+    "st thomas hospital": "Waterloo",
+    "great ormond street": "Russell Square",
+    "moorfields": "Old Street",
+    "barts": "Barbican",
+    "st bartholomews": "Barbican",
+    "kings college hospital": "Brixton",
+    "broadgate": "Liverpool Street",
+    "paternoster square": "St Paul's",
+    "coal drops yard": "King's Cross",
+    "granary square": "King's Cross",
+    "kings cross central": "King's Cross",
+    "here east": "Stratford",
+    "television centre": "White City",
+    "broadcasting house": "Oxford Circus",
+    "silicon roundabout": "Old Street",
+    "tech city": "Old Street",
+    "the shard": "London Bridge",
+    "meta": "Tottenham Court Road",
+    "facebook": "Tottenham Court Road",
+    "apple": "Battersea Power Station",
+    "microsoft": "Paddington",
+    "netflix": "Piccadilly Circus",
+    "bbc": "Oxford Circus",
+    "hsbc": "Canary Wharf",
+    "barclays": "Canary Wharf",
+    "citi": "Canary Wharf",
+    "citigroup": "Canary Wharf",
+    "jp morgan": "Canary Wharf",
+    "jpmorgan": "Canary Wharf",
+    "morgan stanley": "Canary Wharf",
+    "kpmg": "Canary Wharf",
+    "credit suisse": "Canary Wharf",
+    "ubs": "Moorgate",
+    "deutsche bank": "Moorgate",
+    "pwc": "Embankment",
+    "deloitte": "Farringdon",
+    "ey": "London Bridge",
+    "ernst and young": "London Bridge",
+    "bank of england": "Bank",
+    "lloyds of london": "Monument",
+    "accenture": "Monument",
+    "queen mary": "Whitechapel",
+    "qmul": "Whitechapel",
+    "birkbeck": "Russell Square",
+    "london business school": "Baker Street",
+    "lbs": "Baker Street",
+    "university of westminster": "Oxford Circus",
+    "central saint martins": "King's Cross",
+    "london met": "Aldgate",
+    "st marys hospital": "Paddington",
+    "royal free": "West Hampstead",
+    "royal marsden": "South Kensington",
+    "charing cross hospital": "Hammersmith",
+    "chelsea and westminster hospital": "Earl's Court",
+    "national hospital for neurology": "Russell Square",
+    "the o2": "North Greenwich",
+    "o2 arena": "North Greenwich",
+    "westfield stratford": "Stratford",
+    "westfield london": "Shepherd's Bush",
+    "olympia": "Kensington Olympia",
+    "emirates stadium": "Finsbury Park",
+    "harrods": "Knightsbridge",
+    "selfridges": "Bond Street",
+    "tower of london": "Tower Hill",
+    "oxford street": "Oxford Circus",
+    "carnaby street": "Oxford Circus",
+    "camden market": "Camden Town",
+    "portobello road": "Notting Hill Gate",
+    "brick lane": "Shoreditch High Street",
+    "lords": "Baker Street",
+    "arsenal": "Finsbury Park",
+    "barons court": "Hammersmith",
+    "bethnal green": "Whitechapel",
+    "caledonian road": "Highbury & Islington",
+    "chalk farm": "Camden Town",
+    "clapham north": "Brixton",
+    "finchley road": "West Hampstead",
+    "fulham broadway": "Earl's Court",
+    "goldhawk road": "Shepherd's Bush",
+    "holland park": "Notting Hill Gate",
+    "holloway road": "Highbury & Islington",
+    "kensal green": "Willesden Junction",
+    "kilburn park": "West Hampstead",
+    "ladbroke grove": "White City",
+    "latimer road": "White City",
+    "manor house": "Finsbury Park",
+    "mornington crescent": "Camden Town",
+    "north acton": "Willesden Junction",
+    "ravenscourt park": "Hammersmith",
+    "royal oak": "Bayswater",
+    "shepherds bush market": "Shepherd's Bush",
+    "stepney green": "Whitechapel",
+    "stockwell": "Nine Elms",
+    "warwick avenue": "Paddington",
+    "west brompton": "Earl's Court",
+    "west kensington": "Kensington Olympia",
+    "westbourne park": "Bayswater",
+    "wood lane": "White City"
+  }
+}

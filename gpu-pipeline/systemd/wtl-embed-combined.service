@@ -1,0 +1,19 @@
+[Unit]
+Description=Combined DINO + SigLIP embedding daemon (one disk read per image)
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/data/ml/venv/bin/python3 -u /data/ml/dataset/embed_daemon_combined.py
+WorkingDirectory=/data/ml/dataset
+User=wtl
+StandardOutput=append:/data/ml/logs/embed-combined.log
+StandardError=append:/data/ml/logs/embed-combined.log
+Restart=on-failure
+RestartSec=30
+TimeoutStopSec=60
+KillSignal=SIGTERM
+OOMScoreAdjust=200
+
+[Install]
+WantedBy=multi-user.target

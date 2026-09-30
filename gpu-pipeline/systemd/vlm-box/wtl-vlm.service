@@ -1,0 +1,31 @@
+[Unit]
+Description=wtl-vlm — Qwen3.6-27B floorplan VLM (vllm serve, OpenAI-compat API on :8200)
+After=network-online.target
+
+[Service]
+Type=simple
+User=wtl
+WorkingDirectory=/opt/wheretolive/wtl-vlm
+ExecStart=/opt/wheretolive/wtl-vlm/.venv/bin/vllm serve \
+    /opt/wheretolive/wtl-vlm/models/qwen3.6-27b-autoround \
+    --served-model-name qwen3.6-27b \
+    --quantization auto_round \
+    --dtype float16 \
+    --tensor-parallel-size 1 \
+    --max-model-len 8192 \
+    --gpu-memory-utilization 0.92 \
+    --max-num-seqs 4 \
+    --trust-remote-code \
+    --enable-prefix-caching \
+    --enable-chunked-prefill \
+    --host 0.0.0.0 \
+    --port 8200
+Restart=on-failure
+RestartSec=30
+Environment="HF_HOME=/opt/wheretolive/wtl-vlm/hf-cache"
+Environment="CUDA_VISIBLE_DEVICES=0"
+StandardOutput=append:/opt/wheretolive/wtl-vlm/service-stdout.log
+StandardError=append:/opt/wheretolive/wtl-vlm/service-stderr.log
+
+[Install]
+WantedBy=multi-user.target

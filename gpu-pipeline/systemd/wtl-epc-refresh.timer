@@ -1,0 +1,14 @@
+[Unit]
+Description=Daily check for a new EPC bulk file (the source regenerates it on the 1st)
+
+[Timer]
+# Daily, not monthly: the check is one API call and exits when nothing is new;
+# a failed download is retried the next day. A file that failed the gates is
+# NOT rebuilt daily (epc_refresh.py records it; rerun with --force).
+OnCalendar=*-*-* 04:30
+RandomizedDelaySec=15min
+Persistent=true
+Unit=wtl-epc-refresh.service
+
+[Install]
+WantedBy=timers.target

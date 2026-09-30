@@ -1,0 +1,12 @@
+[Unit]
+Description=Run wtl-gpu-tasks-report every 30s
+
+[Timer]
+OnBootSec=15
+# Absolute schedule (every 30s on the wall clock) rather than
+# "30s after previous finished" — see wtl-embed-report.timer for why.
+OnCalendar=*:*:0,30
+AccuracySec=2s
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,16 @@
+[Unit]
+Description=Weekly stable FAISS rebuild (Saturday 03:00 BST/local)
+# Saturday early morning: traffic low, daemon free, OS page cache cold
+# enough that the next workday rebuild + prewarm fits cleanly.
+
+[Timer]
+# Local time (timezone for the host = Europe/London; in BST this fires
+# 03:00 BST, in GMT 03:00 GMT — both fine for "low-traffic window").
+OnCalendar=Sat 03:00
+# In case the system was off at the firing time (Mac sleep / outage),
+# catch up on next boot.
+Persistent=true
+Unit=wtl-faiss-rebuild.service
+
+[Install]
+WantedBy=timers.target

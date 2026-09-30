@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key><string>xyz.wheretolive.backup-freshness</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/local/bin/wtl-pyrun.sh</string>
+        <string>/opt/wheretolive/venv/bin/python3</string>
+        <string>/opt/wheretolive/scripts/backup_freshness_check.py</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/opt/wheretolive</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key><string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+        <key>HOME</key><string>&lt;set-me&gt;</string>
+    </dict>
+    <key>StartCalendarInterval</key>
+    <dict><key>Hour</key><integer>9</integer><key>Minute</key><integer>10</integer></dict>
+    <key>RunAtLoad</key><false/>
+    <key>StandardOutPath</key>
+    <string>/var/log/wheretolive/backup-freshness.log</string>
+    <key>StandardErrorPath</key>
+    <string>/var/log/wheretolive/backup-freshness.log</string>
+</dict>
+</plist>

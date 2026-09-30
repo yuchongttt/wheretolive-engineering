@@ -1,0 +1,16 @@
+[Unit]
+Description=Run wtl-embed-report every minute
+
+[Timer]
+OnBootSec=30
+# Absolute minute schedule. OnUnitActiveSec drifts whenever the previous
+# run takes longer than expected (e.g. SQLite busy_timeout when daemon
+# holds the image_embeddings write lock), accumulating multi-minute gaps
+# in the admin "Embedding Worker" card. OnCalendar fires at the minute
+# regardless of how long the prior run took.
+OnCalendar=*:0/1
+AccuracySec=5s
+Unit=wtl-embed-report.service
+
+[Install]
+WantedBy=timers.target

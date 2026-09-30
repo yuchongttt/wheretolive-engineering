@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    launchd job: self-healing watchdog (../../watchdog).
+
+    Every 120s: run the shared health checks, and for whitelisted failures
+    (crashed launchd job: kickstart; Hetzner wtl-worker not active: ssh
+    restart; tunnel or host network wedged: restart cloudflared or bounce
+    Wi-Fi) auto-fix within an anti-flapping budget, then escalate.
+    Verify-after-act: recovery is confirmed on the next tick. Event-driven
+    Telegram: speaks only on problem/resolution. Posts a heartbeat to the admin
+    host-metrics API (host_id=mac-watchdog) so the GPU box can detect this
+    watchdog dying.
+
+    Independent of what it heals; wrapped in wtl-pyrun.sh so the getpath crash
+    it exists to catch can't kill it either.
+
+    WTL_ADMIN_KEY: the live ~/Library/LaunchAgents copy holds the real key;
+    this repo copy keeps the placeholder. Do NOT commit the key.
+
+    Install:
+        cp xyz.wheretolive.watchdog.plist ~/Library/LaunchAgents/
+        # edit the ~/Library copy: set WTL_API and WTL_ADMIN_KEY
+        launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/xyz.wheretolive.watchdog.plist
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>xyz.wheretolive.watchdog</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/local/bin/wtl-pyrun.sh</string>
+        <string>/opt/wheretolive/venv/bin/python3</string>
+        <string>/opt/wheretolive/scripts/watchdog.py</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/opt/wheretolive</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+        <key>HOME</key>
+        <string>&lt;set-me&gt;</string>
+        <key>WATCHDOG_MODE</key>
+        <string>enforce</string>
+        <key>WTL_API</key>
+        <string>&lt;set-me&gt;</string>
+        <key>WTL_ADMIN_KEY</key>
+        <string>&lt;set-me&gt;</string>
+    </dict>
+
+    <key>StartInterval</key>
+    <integer>120</integer>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <dict>
+        <key>SuccessfulExit</key>
+        <false/>
+    </dict>
+
+    <key>ThrottleInterval</key>
+    <integer>15</integer>
+
+    <key>StandardOutPath</key>
+    <string>/var/log/wheretolive/watchdog.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/var/log/wheretolive/watchdog.err</string>
+</dict>
+</plist>

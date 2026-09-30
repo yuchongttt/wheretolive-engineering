@@ -1,0 +1,10 @@
+# local config / secrets
+property_params.json
+.env
+# runtime data (caches, downloaded or licensed datasets)
+data/*.db
+data/*.db-*
+data/*.csv
+data/london_parks.json
+__pycache__/
+.pytest_cache/

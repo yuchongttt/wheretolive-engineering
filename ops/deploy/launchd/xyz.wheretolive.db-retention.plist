@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    launchd job: weekly DB retention sweep for evaluations.db.
+
+    Runs scripts/nightly_db_retention.py with the vacuum flag once a week
+    (Sun 03:30, off-peak): prunes audit rows older than 30d, drops stale
+    dim_* cache rows on a CACHE_VERSION bump, purges soft-deleted chats >7d,
+    then VACUUMs *only* when there's real space to reclaim (the script skips
+    the ~70s exclusive-lock VACUUM in steady state).
+
+    History: the nightly maintenance cron was retired on 2026-05-29 into a
+    manual 'nightly-maintenance' workflow, "for a future generic scheduler to
+    invoke". The other steps of that workflow already had a new home;
+    db-retention was the one step left with no scheduled runner. This job
+    restores it. /api/health's db_retention_freshness check tracks this via
+    ops.db skill_runs.
+
+    Wrapped in wtl-pyrun.sh (retries the getpath-EINTR startup crash window)
+    per the other launchd Python jobs.
+
+    Install:
+        cp xyz.wheretolive.db-retention.plist ~/Library/LaunchAgents/
+        launchctl load ~/Library/LaunchAgents/xyz.wheretolive.db-retention.plist
+    Unload:
+        launchctl unload ~/Library/LaunchAgents/xyz.wheretolive.db-retention.plist
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>xyz.wheretolive.db-retention</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/local/bin/wtl-pyrun.sh</string>
+        <string>/opt/wheretolive/venv/bin/python3</string>
+        <string>/opt/wheretolive/scripts/nightly_db_retention.py</string>
+        <string>--vacuum</string>
+        <string>--invoked-by</string>
+        <string>launchd</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/opt/wheretolive</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+        <key>HOME</key>
+        <string>&lt;set-me&gt;</string>
+    </dict>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Weekday</key>
+        <integer>0</integer>
+        <key>Hour</key>
+        <integer>3</integer>
+        <key>Minute</key>
+        <integer>30</integer>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>/var/log/wheretolive/db-retention.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/var/log/wheretolive/db-retention.log</string>
+</dict>
+</plist>

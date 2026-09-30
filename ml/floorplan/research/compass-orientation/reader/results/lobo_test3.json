@@ -1,0 +1,923 @@
+{
+ "summary": {
+  "tag": "final",
+  "n": 61,
+  "median_err": 4.3,
+  "acc15": 0.9180327868852459,
+  "acc22": 0.9508196721311475,
+  "acc30": 0.9672131147540983,
+  "flips": 0,
+  "gates": {
+   "5": {
+    "yield_": 0.18032786885245902,
+    "prec22": 1.0,
+    "prec30": 1.0,
+    "n": 11
+   },
+   "10": {
+    "yield_": 0.5901639344262295,
+    "prec22": 1.0,
+    "prec30": 1.0,
+    "n": 36
+   },
+   "15": {
+    "yield_": 0.7540983606557377,
+    "prec22": 1.0,
+    "prec30": 1.0,
+    "n": 46
+   },
+   "20": {
+    "yield_": 0.8852459016393442,
+    "prec22": 0.9814814814814815,
+    "prec30": 0.9814814814814815,
+    "n": 54
+   },
+   "30": {
+    "yield_": 0.9180327868852459,
+    "prec22": 0.9821428571428571,
+    "prec30": 0.9821428571428571,
+    "n": 56
+   },
+   "45": {
+    "yield_": 0.9672131147540983,
+    "prec22": 0.9830508474576272,
+    "prec30": 0.9830508474576272,
+    "n": 59
+   }
+  },
+  "train_real": {
+   "n": 172,
+   "median_err": 2.95,
+   "acc22": 1.0,
+   "flips": 0
+  }
+ },
+ "results": [
+  {
+   "pid": "b3-001",
+   "style": "arrow through N circle",
+   "truth": 330.0,
+   "pred": 320.8,
+   "err": 9.2,
+   "spread": 6.4,
+   "preds": [
+    324.9,
+    318.5,
+    319.9,
+    320.1
+   ]
+  },
+  {
+   "pid": "b3-002",
+   "style": "sundial compass",
+   "truth": 90.0,
+   "pred": 99.0,
+   "err": 9.0,
+   "spread": 22.5,
+   "preds": [
+    89.2,
+    101.8,
+    111.6,
+    93.3
+   ]
+  },
+  {
+   "pid": "b3-003",
+   "style": "star + italic N",
+   "truth": 30.0,
+   "pred": 5.7,
+   "err": 24.3,
+   "spread": 167.0,
+   "preds": [
+    345.9,
+    358.2,
+    191.2,
+    40.0
+   ]
+  },
+  {
+   "pid": "b3-004",
+   "style": "star + N",
+   "truth": 45.0,
+   "pred": 46.1,
+   "err": 1.1,
+   "spread": 8.8,
+   "preds": [
+    46.6,
+    50.1,
+    41.3,
+    46.3
+   ]
+  },
+  {
+   "pid": "b3-005",
+   "style": "circled letters (logo)",
+   "truth": 150.0,
+   "pred": 129.2,
+   "err": 20.8,
+   "spread": 39.5,
+   "preds": [
+    116.6,
+    125.2,
+    156.0,
+    120.0
+   ]
+  },
+  {
+   "pid": "b3-006",
+   "style": "star + N",
+   "truth": 225.0,
+   "pred": 220.3,
+   "err": 4.7,
+   "spread": 6.3,
+   "preds": [
+    219.1,
+    219.9,
+    217.9,
+    224.1
+   ]
+  },
+  {
+   "pid": "b3-007",
+   "style": "eight-line asterisk + letters",
+   "truth": 135.0,
+   "pred": 141.2,
+   "err": 6.2,
+   "spread": 19.4,
+   "preds": [
+    140.2,
+    131.6,
+    141.9,
+    151.0
+   ]
+  },
+  {
+   "pid": "b3-008",
+   "style": "star + N",
+   "truth": 0.0,
+   "pred": 357.1,
+   "err": 2.9,
+   "spread": 6.6,
+   "preds": [
+    1.5,
+    354.9,
+    355.9,
+    356.0
+   ]
+  },
+  {
+   "pid": "b3-009",
+   "style": "circled letters (logo)",
+   "truth": 45.0,
+   "pred": 44.3,
+   "err": 0.7,
+   "spread": 10.9,
+   "preds": [
+    41.5,
+    47.8,
+    49.4,
+    38.5
+   ]
+  },
+  {
+   "pid": "b3-010",
+   "style": "circled letters",
+   "truth": 135.0,
+   "pred": 149.4,
+   "err": 14.4,
+   "spread": 18.3,
+   "preds": [
+    149.3,
+    142.6,
+    160.8,
+    145.1
+   ]
+  },
+  {
+   "pid": "b3-011",
+   "style": "filled-point star4 + N at centre",
+   "truth": 330.0,
+   "pred": 338.7,
+   "err": 8.7,
+   "spread": 10.0,
+   "preds": [
+    342.3,
+    336.3,
+    343.1,
+    333.2
+   ]
+  },
+  {
+   "pid": "b3-012",
+   "style": "paper-plane dart + circle",
+   "truth": 45.0,
+   "pred": 49.8,
+   "err": 4.8,
+   "spread": 9.3,
+   "preds": [
+    53.3,
+    54.5,
+    45.2,
+    46.4
+   ]
+  },
+  {
+   "pid": "b3-013",
+   "style": "dart + circle + N",
+   "truth": 15.0,
+   "pred": 13.8,
+   "err": 1.2,
+   "spread": 12.4,
+   "preds": [
+    18.7,
+    6.2,
+    13.2,
+    17.1
+   ]
+  },
+  {
+   "pid": "b3-014",
+   "style": "star + NESW letters",
+   "truth": 300.0,
+   "pred": 257.0,
+   "err": 43.0,
+   "spread": 19.0,
+   "preds": [
+    261.7,
+    265.2,
+    246.1,
+    255.0
+   ]
+  },
+  {
+   "pid": "b3-015",
+   "style": "narrow filled pennant + N",
+   "truth": 150.0,
+   "pred": 149.5,
+   "err": 0.5,
+   "spread": 5.1,
+   "preds": [
+    146.5,
+    149.4,
+    151.6,
+    150.5
+   ]
+  },
+  {
+   "pid": "b3-016",
+   "style": "filled-point star4 + circled N",
+   "truth": 150.0,
+   "pred": 154.3,
+   "err": 4.3,
+   "spread": 6.9,
+   "preds": [
+    157.4,
+    150.6,
+    157.0,
+    152.2
+   ]
+  },
+  {
+   "pid": "b3-017",
+   "style": "narrow filled pennant + N",
+   "truth": 150.0,
+   "pred": 142.9,
+   "err": 7.1,
+   "spread": 1.8,
+   "preds": [
+    141.9,
+    142.8,
+    143.6,
+    143.5
+   ]
+  },
+  {
+   "pid": "b3-018",
+   "style": "arrow + N circle + rays",
+   "truth": 0.0,
+   "pred": 358.4,
+   "err": 1.6,
+   "spread": 7.1,
+   "preds": [
+    0.2,
+    356.4,
+    354.9,
+    2.0
+   ]
+  },
+  {
+   "pid": "b3-019",
+   "style": "filled-point star4 + circled N",
+   "truth": 90.0,
+   "pred": 91.8,
+   "err": 1.8,
+   "spread": 4.0,
+   "preds": [
+    94.5,
+    91.4,
+    90.9,
+    90.5
+   ]
+  },
+  {
+   "pid": "b3-020",
+   "style": "circled letters (logo)",
+   "truth": 240.0,
+   "pred": 234.1,
+   "err": 5.9,
+   "spread": 15.5,
+   "preds": [
+    242.7,
+    227.6,
+    227.2,
+    238.8
+   ]
+  },
+  {
+   "pid": "b3-021",
+   "style": "small star4 + N",
+   "truth": 0.0,
+   "pred": 19.8,
+   "err": 19.8,
+   "spread": 8.5,
+   "preds": [
+    18.0,
+    21.2,
+    15.7,
+    24.2
+   ]
+  },
+  {
+   "pid": "b3-022",
+   "style": "pinwheel star4 + N",
+   "truth": 150.0,
+   "pred": 152.5,
+   "err": 2.5,
+   "spread": 4.9,
+   "preds": [
+    150.1,
+    151.8,
+    155.1,
+    152.9
+   ]
+  },
+  {
+   "pid": "b3-023",
+   "style": "arrow + GL circle + rays",
+   "truth": 15.0,
+   "pred": 10.9,
+   "err": 4.1,
+   "spread": 4.0,
+   "preds": [
+    9.6,
+    10.7,
+    13.5,
+    9.7
+   ]
+  },
+  {
+   "pid": "b3-024",
+   "style": "upright NESW rose",
+   "truth": 0.0,
+   "pred": 359.4,
+   "err": 0.6,
+   "spread": 12.0,
+   "preds": [
+    359.8,
+    0.0,
+    352.9,
+    4.9
+   ]
+  },
+  {
+   "pid": "b3-025",
+   "style": "pinwheel star4 + N (transparent PNG)",
+   "truth": 150.0,
+   "pred": 150.8,
+   "err": 0.8,
+   "spread": 19.1,
+   "preds": [
+    139.4,
+    148.7,
+    158.4,
+    156.7
+   ]
+  },
+  {
+   "pid": "b3-026",
+   "style": "arrow + N circle + rays",
+   "truth": 210.0,
+   "pred": 209.0,
+   "err": 1.0,
+   "spread": 10.9,
+   "preds": [
+    205.4,
+    204.2,
+    211.2,
+    215.0
+   ]
+  },
+  {
+   "pid": "b3-027",
+   "style": "tilted star + rotated NESW",
+   "truth": 165.0,
+   "pred": 167.5,
+   "err": 2.5,
+   "spread": 7.4,
+   "preds": [
+    164.0,
+    171.5,
+    169.9,
+    164.7
+   ]
+  },
+  {
+   "pid": "b3-028",
+   "style": "arrow + N circle + rays",
+   "truth": 150.0,
+   "pred": 144.6,
+   "err": 5.4,
+   "spread": 2.8,
+   "preds": [
+    144.4,
+    144.2,
+    146.3,
+    143.5
+   ]
+  },
+  {
+   "pid": "b3-029",
+   "style": "long-point rose + rotated N at centre",
+   "truth": 120.0,
+   "pred": 121.1,
+   "err": 1.1,
+   "spread": 32.1,
+   "preds": [
+    127.6,
+    103.8,
+    116.9,
+    135.9
+   ]
+  },
+  {
+   "pid": "b3-030",
+   "style": "long-spike rose + rotated N at tip",
+   "truth": 240.0,
+   "pred": 19.6,
+   "err": 139.6,
+   "spread": 171.6,
+   "preds": [
+    289.3,
+    83.4,
+    240.8,
+    69.1
+   ]
+  },
+  {
+   "pid": "b3-031",
+   "style": "arrow through circle + N",
+   "truth": 15.0,
+   "pred": 21.9,
+   "err": 6.9,
+   "spread": 4.8,
+   "preds": [
+    23.8,
+    19.0,
+    23.7,
+    21.2
+   ]
+  },
+  {
+   "pid": "b3-032",
+   "style": "rose + rotated N",
+   "truth": 270.0,
+   "pred": 266.6,
+   "err": 3.4,
+   "spread": 8.4,
+   "preds": [
+    266.1,
+    262.2,
+    267.5,
+    270.6
+   ]
+  },
+  {
+   "pid": "b3-033",
+   "style": "circled letters (logo)",
+   "truth": 210.0,
+   "pred": 205.4,
+   "err": 4.6,
+   "spread": 15.9,
+   "preds": [
+    213.2,
+    198.2,
+    197.3,
+    212.9
+   ]
+  },
+  {
+   "pid": "b3-034",
+   "style": "circled letters (logo)",
+   "truth": 255.0,
+   "pred": 251.4,
+   "err": 3.6,
+   "spread": 20.2,
+   "preds": [
+    263.3,
+    252.7,
+    246.2,
+    243.1
+   ]
+  },
+  {
+   "pid": "b3-035",
+   "style": "arrow + N circle + rays",
+   "truth": 120.0,
+   "pred": 118.3,
+   "err": 1.7,
+   "spread": 7.4,
+   "preds": [
+    119.5,
+    120.8,
+    119.5,
+    113.4
+   ]
+  },
+  {
+   "pid": "b3-036",
+   "style": "arrow + N circle + rays",
+   "truth": 315.0,
+   "pred": 320.8,
+   "err": 5.8,
+   "spread": 5.7,
+   "preds": [
+    324.3,
+    321.8,
+    318.8,
+    318.5
+   ]
+  },
+  {
+   "pid": "b3-037",
+   "style": "star + N",
+   "truth": 165.0,
+   "pred": 161.1,
+   "err": 3.9,
+   "spread": 5.5,
+   "preds": [
+    157.7,
+    160.7,
+    163.2,
+    163.0
+   ]
+  },
+  {
+   "pid": "b3-038",
+   "style": "star + N",
+   "truth": 315.0,
+   "pred": 312.8,
+   "err": 2.2,
+   "spread": 1.6,
+   "preds": [
+    314.0,
+    312.4,
+    312.5,
+    312.4
+   ]
+  },
+  {
+   "pid": "b3-039",
+   "style": "star4 + NESW letters",
+   "truth": 240.0,
+   "pred": 242.4,
+   "err": 2.4,
+   "spread": 12.3,
+   "preds": [
+    241.7,
+    234.8,
+    246.2,
+    247.1
+   ]
+  },
+  {
+   "pid": "b3-040",
+   "style": "filled-point star4 + circled Z-shaped N",
+   "truth": 270.0,
+   "pred": 262.0,
+   "err": 8.0,
+   "spread": 9.5,
+   "preds": [
+    260.0,
+    267.8,
+    262.1,
+    258.3
+   ]
+  },
+  {
+   "pid": "b3-041",
+   "style": "filled-point star4 + circled Z-shaped N",
+   "truth": 45.0,
+   "pred": 49.6,
+   "err": 4.6,
+   "spread": 2.7,
+   "preds": [
+    49.9,
+    48.9,
+    48.4,
+    51.1
+   ]
+  },
+  {
+   "pid": "b3-042",
+   "style": "star4 ring + N",
+   "truth": 180.0,
+   "pred": 181.5,
+   "err": 1.5,
+   "spread": 2.6,
+   "preds": [
+    181.5,
+    183.0,
+    180.5,
+    181.1
+   ]
+  },
+  {
+   "pid": "b3-043",
+   "style": "filled needle + tail feathers + circled rotated N",
+   "truth": 135.0,
+   "pred": 132.4,
+   "err": 2.6,
+   "spread": 6.1,
+   "preds": [
+    135.8,
+    130.8,
+    129.7,
+    133.2
+   ]
+  },
+  {
+   "pid": "b3-044",
+   "style": "arrow + N circle + rays",
+   "truth": 300.0,
+   "pred": 300.5,
+   "err": 0.5,
+   "spread": 10.5,
+   "preds": [
+    306.7,
+    297.6,
+    296.2,
+    301.5
+   ]
+  },
+  {
+   "pid": "b3-045",
+   "style": "NESW rose (whole symbol rotated)",
+   "truth": 15.0,
+   "pred": 19.2,
+   "err": 4.2,
+   "spread": 30.4,
+   "preds": [
+    26.8,
+    11.3,
+    4.1,
+    34.6
+   ]
+  },
+  {
+   "pid": "b3-046",
+   "style": "rose8 + N at tip",
+   "truth": 285.0,
+   "pred": 282.8,
+   "err": 2.2,
+   "spread": 11.5,
+   "preds": [
+    286.0,
+    274.6,
+    286.1,
+    284.5
+   ]
+  },
+  {
+   "pid": "b3-047",
+   "style": "boxed N + arrow shaft",
+   "truth": 150.0,
+   "pred": 144.1,
+   "err": 5.9,
+   "spread": 7.2,
+   "preds": [
+    140.5,
+    143.7,
+    147.6,
+    144.7
+   ]
+  },
+  {
+   "pid": "b3-048",
+   "style": "filled-point star4 + circled N",
+   "truth": 345.0,
+   "pred": 340.1,
+   "err": 4.9,
+   "spread": 7.5,
+   "preds": [
+    342.2,
+    335.7,
+    343.3,
+    339.4
+   ]
+  },
+  {
+   "pid": "b3-049",
+   "style": "circle + radius line + N",
+   "truth": 315.0,
+   "pred": 321.3,
+   "err": 6.3,
+   "spread": 18.8,
+   "preds": [
+    323.5,
+    321.2,
+    310.8,
+    329.6
+   ]
+  },
+  {
+   "pid": "b3-050",
+   "style": "rose8 + rotated N at tip",
+   "truth": 225.0,
+   "pred": 227.2,
+   "err": 2.2,
+   "spread": 9.0,
+   "preds": [
+    222.6,
+    227.9,
+    226.7,
+    231.6
+   ]
+  },
+  {
+   "pid": "b3-051",
+   "style": "rose8 + rotated N at tip",
+   "truth": 105.0,
+   "pred": 110.5,
+   "err": 5.5,
+   "spread": 6.3,
+   "preds": [
+    107.9,
+    108.9,
+    111.1,
+    114.2
+   ]
+  },
+  {
+   "pid": "b3-052",
+   "style": "circle + radius line + rotated N (teal)",
+   "truth": 135.0,
+   "pred": 138.7,
+   "err": 3.7,
+   "spread": 17.6,
+   "preds": [
+    129.3,
+    139.3,
+    139.2,
+    146.9
+   ]
+  },
+  {
+   "pid": "b3-053",
+   "style": "rose8 + rotated N at tip",
+   "truth": 300.0,
+   "pred": 293.5,
+   "err": 6.5,
+   "spread": 8.7,
+   "preds": [
+    289.5,
+    298.2,
+    296.2,
+    290.1
+   ]
+  },
+  {
+   "pid": "b3-054",
+   "style": "boxed rotated N + arrow shaft",
+   "truth": 240.0,
+   "pred": 243.1,
+   "err": 3.1,
+   "spread": 5.4,
+   "preds": [
+    244.8,
+    240.5,
+    241.1,
+    245.9
+   ]
+  },
+  {
+   "pid": "b3-055",
+   "style": "tilted long-point NESW star4",
+   "truth": 285.0,
+   "pred": 287.0,
+   "err": 2.0,
+   "spread": 12.9,
+   "preds": [
+    281.4,
+    281.5,
+    290.9,
+    294.3
+   ]
+  },
+  {
+   "pid": "b3-056",
+   "style": "circled letters (logo)",
+   "truth": 240.0,
+   "pred": 232.8,
+   "err": 7.2,
+   "spread": 9.3,
+   "preds": [
+    236.0,
+    226.7,
+    234.4,
+    234.1
+   ]
+  },
+  {
+   "pid": "b3-057",
+   "style": "pinwheel star4 ring + N",
+   "truth": 300.0,
+   "pred": 310.9,
+   "err": 10.9,
+   "spread": 10.6,
+   "preds": [
+    304.7,
+    311.6,
+    311.9,
+    315.2
+   ]
+  },
+  {
+   "pid": "b3-058",
+   "style": "pinwheel star4 ring + N",
+   "truth": 105.0,
+   "pred": 118.1,
+   "err": 13.1,
+   "spread": 4.7,
+   "preds": [
+    116.1,
+    118.8,
+    120.8,
+    116.8
+   ]
+  },
+  {
+   "pid": "b3-059",
+   "style": "pinwheel star4 ring + N",
+   "truth": 135.0,
+   "pred": 140.3,
+   "err": 5.3,
+   "spread": 11.2,
+   "preds": [
+    132.2,
+    142.4,
+    143.5,
+    143.2
+   ]
+  },
+  {
+   "pid": "b3-060",
+   "style": "half-filled star4 + circle + rotated N",
+   "truth": 255.0,
+   "pred": 251.2,
+   "err": 3.8,
+   "spread": 4.4,
+   "preds": [
+    249.1,
+    249.0,
+    253.4,
+    253.2
+   ]
+  },
+  {
+   "pid": "b3-061",
+   "style": "circle + radius line + N (teal)",
+   "truth": 0.0,
+   "pred": 4.7,
+   "err": 4.7,
+   "spread": 7.7,
+   "preds": [
+    2.7,
+    6.9,
+    8.4,
+    0.7
+   ]
+  }
+ ],
+ "args": {
+  "train": "1,2,4",
+  "test": "3",
+  "epochs": 15,
+  "size": 160,
+  "per_seed": 48,
+  "bs": 64,
+  "exclude": "exclude.txt",
+  "out": "<out>",
+  "seed": 0,
+  "arch": "resnet18"
+ }
+}

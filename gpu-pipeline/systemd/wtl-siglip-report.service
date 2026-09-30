@@ -1,0 +1,9 @@
+[Unit]
+Description=Push SigLIP-2 luxury embedding progress to mac admin
+After=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/wtl/wtl.env
+ExecStart=/data/ml/venv/bin/python3 /data/ml/dataset/report_siglip_progress.py
+User=wtl

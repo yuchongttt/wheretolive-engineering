@@ -1,0 +1,11 @@
+[Unit]
+Description=Run wtl-host-report every minute
+
+[Timer]
+OnCalendar=*-*-* *:*:00
+AccuracySec=1s
+Persistent=false
+Unit=wtl-host-report.service
+
+[Install]
+WantedBy=timers.target

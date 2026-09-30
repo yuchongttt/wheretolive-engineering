@@ -1,0 +1,121 @@
+{
+  "airports": [
+    {
+      "name": "Heathrow Airport",
+      "postcode": "TW6 1EW",
+      "location": {"latitude": 51.4700, "longitude": -0.4543},
+      "importance": 1.0,
+      "annual_passengers": 79000000,
+      "tier": "mega_hub",
+      "iata": "LHR"
+    },
+    {
+      "name": "London Gatwick Airport",
+      "postcode": "RH6 0NP",
+      "location": {"latitude": 51.1537, "longitude": -0.1821},
+      "importance": 0.9,
+      "annual_passengers": 40000000,
+      "tier": "major_hub",
+      "iata": "LGW"
+    },
+    {
+      "name": "London Stansted Airport",
+      "postcode": "CM24 1RW",
+      "location": {"latitude": 51.8860, "longitude": 0.2389},
+      "importance": 0.8,
+      "annual_passengers": 28000000,
+      "tier": "major_hub",
+      "iata": "STN"
+    },
+    {
+      "name": "London Luton Airport",
+      "postcode": "LU2 9LY",
+      "location": {"latitude": 51.8747, "longitude": -0.3683},
+      "importance": 0.7,
+      "annual_passengers": 16000000,
+      "tier": "regional_hub",
+      "iata": "LTN"
+    },
+    {
+      "name": "London City Airport",
+      "postcode": "E16 2PX",
+      "location": {"latitude": 51.5048, "longitude": 0.0495},
+      "importance": 0.65,
+      "annual_passengers": 5000000,
+      "tier": "regional",
+      "iata": "LCY"
+    }
+  ],
+  "train_stations": [
+    {
+      "name": "St Pancras International",
+      "postcode": "N1C 4QP",
+      "location": {"latitude": 51.5317, "longitude": -0.1260},
+      "importance": 1.0,
+      "annual_passengers": 34000000,
+      "services": ["Eurostar", "East Midlands", "Thameslink"],
+      "tier": "international"
+    },
+    {
+      "name": "Victoria",
+      "postcode": "SW1V 1JU",
+      "location": {"latitude": 51.4952, "longitude": -0.1439},
+      "importance": 1.0,
+      "annual_passengers": 75000000,
+      "services": ["Gatwick Express", "Southern", "Southeastern"],
+      "tier": "major_terminus"
+    },
+    {
+      "name": "Waterloo",
+      "postcode": "SE1 8SW",
+      "location": {"latitude": 51.5031, "longitude": -0.1132},
+      "importance": 1.0,
+      "annual_passengers": 94000000,
+      "services": ["South Western Railway"],
+      "tier": "major_terminus"
+    },
+    {
+      "name": "Paddington",
+      "postcode": "W2 1HQ",
+      "location": {"latitude": 51.5154, "longitude": -0.1755},
+      "importance": 0.95,
+      "annual_passengers": 36000000,
+      "services": ["Heathrow Express", "GWR", "Elizabeth Line"],
+      "tier": "major_terminus"
+    },
+    {
+      "name": "Liverpool Street",
+      "postcode": "EC2M 7QH",
+      "location": {"latitude": 51.5178, "longitude": -0.0823},
+      "importance": 0.9,
+      "annual_passengers": 67000000,
+      "services": ["Greater Anglia", "Stansted Express", "Elizabeth Line"],
+      "tier": "major_terminus"
+    },
+    {
+      "name": "King's Cross",
+      "postcode": "N1 9AP",
+      "location": {"latitude": 51.5308, "longitude": -0.1238},
+      "importance": 0.9,
+      "annual_passengers": 34000000,
+      "services": ["LNER", "Grand Central", "Thameslink"],
+      "tier": "major_terminus"
+    },
+    {
+      "name": "Euston",
+      "postcode": "NW1 2DU",
+      "location": {"latitude": 51.5282, "longitude": -0.1337},
+      "importance": 0.85,
+      "annual_passengers": 44000000,
+      "services": ["Avanti West Coast", "West Midlands"],
+      "tier": "major_terminus"
+    }
+  ],
+  "_metadata": {
+    "version": "1.1",
+    "last_updated": "2024-01",
+    "source": "UK Government / Network Rail / CAA statistics",
+    "coverage": "Greater London area",
+    "note": "Postcodes added for TfL API compatibility"
+  }
+}

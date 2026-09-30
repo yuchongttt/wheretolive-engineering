@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "wtl": {
+      "type": "stdio",
+      "command": "python3",
+      "args": [
+        "mcp_all.py"
+      ]
+    }
+  }
+}

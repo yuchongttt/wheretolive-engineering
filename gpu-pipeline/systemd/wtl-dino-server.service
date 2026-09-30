@@ -1,0 +1,16 @@
+[Unit]
+Description=wheretolive DINOv3-L image search server
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/data/ml/venv/bin/python3 -u /data/ml/dataset/dino_server_v3.py
+WorkingDirectory=/data/ml/dataset
+Restart=on-failure
+RestartSec=30
+User=wtl
+StandardOutput=append:/data/ml/dataset/dino_server.log
+StandardError=append:/data/ml/dataset/dino_server.log
+
+[Install]
+WantedBy=multi-user.target
